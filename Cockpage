@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Dynamic Clock</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    max-height: 600px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px;
+    font-family: 'Roboto Mono', monospace;
+    background: url('https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clock-container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 320px;
+    user-select: none;
+  }
+
+  .time {
+    font-size: 4rem;
+    color: #00ffea;
+    letter-spacing: 0.1em;
+  }
+
+  .date {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #ffffffc7;
+  }
+
+  @media (max-width: 400px) {
+    .time {
+      font-size: 3rem;
+    }
+    .date {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="clock-container" role="main" aria-label="Live digital clock">
+    <div class="time" id="time">00:00:00</div>
+    <div class="date" id="date">Loading date...</div>
+  </div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    // Format time as HH:MM:SS
+    const hours = now.getHours().toString().padStart(2,'0');
+    const minutes = now.getMinutes().toString().padStart(2,'0');
+    const seconds = now.getSeconds().toString().padStart(2,'0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('time').textContent = timeString;
+
+    // Format date as Weekday, Month Day, Year
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString(undefined, options);
+    document.getElementById('date').textContent = dateString;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
+
+```
+
